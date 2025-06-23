@@ -1,12 +1,23 @@
-# React + Vite
+# Currency Exchange React Frontend
+This is the React + Vite frontend application for the Currency Exchange project. It fetches exchange rates and displays currency data from the backend API.
+This forntend uses data from Spring Boot API Backed project visit: https://github.com/Rolands-Bidzans/Currency-Exchange-API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Getting Started
+### Prerequisites
+Node.js v18 or higher (tested with v22.14.0)
+npm package manage v9 or higher (tested with v10.5.2)
 
-Currently, two official plugins are available:
+### Installation
+```bash
+git clone https://github.com/your-username/currency-exchange-frontend.git
+cd currency-exchange-frontend
+npm install
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Configure API Endpoint
+The frontend expects the backend API URL in environment variables:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Create a .env file in the project root:
+```bash
+VITE_API_BASE_URL=http://localhost:8080/api
+```
