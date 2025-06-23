@@ -1,0 +1,18 @@
+import React from "react";
+import LanguageSelect from "../utils/LanguageSelect"
+import ThemeSelector from "../utils/ThemeSelector"
+
+// TRANSLATION
+import { useTranslation } from 'react-i18next';
+
+const Header = ({ setMode, currentMode }) => {
+
+  return (
+        <header className="flex justify-end items-center shadow-sm p-5 h-20 bg-gray-100 sticky top-0 z-50 dark:bg-red-900">
+            <ThemeSelector setMode={setMode} currentMode={currentMode}/>
+            <LanguageSelect />
+        </header>
+  );
+};
+
+export default Header;

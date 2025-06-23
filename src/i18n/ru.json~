@@ -1,0 +1,12 @@
+{
+  "welcome": "Добро пожаловать",
+  "currency": "Валюта",
+  "amount": "сумма",
+  "Language": "Язык",
+  "selectDate": "выберите дату",
+  "currencyExchangeRateCalculator": "Калькулятор валют",
+  "theme": "Тема",
+  "lightMode": "Светлая тема",
+  "darkMode": "Тёмная тема",
+  "loading": "Loading"
+}

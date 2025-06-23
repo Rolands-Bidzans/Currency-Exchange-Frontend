@@ -1,0 +1,10 @@
+import * as React from 'react';
+import { IoCloudyNight } from "react-icons/io5";
+
+const ColorModeDropdown = () => {
+    return (
+          <IoCloudyNight className="text-5xl cursor-pointer"/>
+    )
+}
+
+export default ColorModeDropdown;

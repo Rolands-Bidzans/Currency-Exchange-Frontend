@@ -1,0 +1,16 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+    darkMode: 'class', // This is critical to toggle dark mode via a class
+    theme: {
+        extend: {
+            colors: {
+                grape: 'rgb(114, 35, 204)',
+            },
+        },
+    },
+    plugins: [],
+    content: [
+        './index.html',
+        './src/**/*.{js,jsx,ts,tsx}',
+    ],
+}

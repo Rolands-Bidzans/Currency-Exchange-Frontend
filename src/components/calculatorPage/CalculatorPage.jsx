@@ -1,0 +1,159 @@
+import React, { useEffect, useState, useCallback } from "react";
+import { IoIosSwap } from "react-icons/io";
+import api from "../../services/api";
+import CustomDatePicker from "../../utils/CustomDatePicker"
+import CustomizedCurrencyDropdown from "../../utils/CustomizedCurrencyDropdown"
+import dayjs from "dayjs";
+
+// TRANSLATION
+import { useTranslation } from 'react-i18next';
+
+
+// INPUT FORM
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
+function convertCurrency(amountFrom, rateFrom, rateTo) {
+  if (!rateFrom || !rateTo) return 0;
+  return (amountFrom / rateFrom) * rateTo;
+}
+
+const CalculatorPage = () => {
+
+    const { t } = useTranslation();
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [date, setDate] = useState(dayjs());
+    const [fromCurrency, setFromCurrency] = useState('');
+    const [toCurrency, setToCurrency] = useState('');
+    const [amountFrom, setAmountFrom] = useState(1);
+    const [amountTo, setAmountTo] = useState(1);
+    const [allExchangeRates, setAllExchangeRates] = useState(null);
+    const [currencies, setCurrencies] = useState([]);
+    const [lastChangedField, setLastChangedField] = useState('from'); // 'from' or 'to'
+
+   const handleSwapCurrencies = () => {
+      let temp = toCurrency;
+      setToCurrency(fromCurrency);
+      setFromCurrency(temp);
+    };
+
+    // Initial call to get all available currencies
+    useEffect(() => {
+      fetchAvailableCurrencies();
+    }, []);
+
+    // Function that makes request and gets all available currencies USD, EUR ...
+    const fetchAvailableCurrencies = useCallback(async () => {
+        setLoading(true);
+        try {
+          const response = await api.get(`/currencies`);
+          setCurrencies(response.data);
+
+          const first = response.data[0];
+          const second = response.data[1];
+
+          setFromCurrency(first);
+          setToCurrency(second);
+          () => clearInterval(interval)
+        } catch (err) {
+          setError(err?.response?.data?.message);
+          console.error("Error fetching user details", err);
+        } finally {
+          setLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchAllExchangeRates();
+    }, [date]);
+
+  const fetchAllExchangeRates = async () => {
+    try {
+      const formattedDate = date.format('YYYY-MM-DD');
+      const response = await api.get(`/all-exchange-rate?date=${formattedDate}`);
+      setAllExchangeRates(response.data);
+    } catch (err) {
+      console.error("Error fetching exchange rate:", err);
+    }
+  };
+
+
+    useEffect(() => {
+      if (!allExchangeRates) return;
+      if (lastChangedField === 'from') {
+          const converted = convertCurrency(amountFrom, allExchangeRates[fromCurrency], allExchangeRates[toCurrency]).toFixed(2);
+        setAmountTo(converted);
+      } else if (lastChangedField === 'to') {
+          const converted = convertCurrency(amountTo, allExchangeRates[toCurrency], allExchangeRates[fromCurrency]).toFixed(2);
+        setAmountFrom(converted);
+      }
+    }, [amountFrom, amountTo, allExchangeRates, date, fromCurrency, toCurrency]);
+
+  return currencies.length ? (
+    // flex-1
+    <div className="flex flex-col justify-center items-center mt-20">
+
+      <div className="text-2xl font-bold" >{t('currencyExchangeRateCalculator')}</div>
+
+      <div className="flex flex-col items-center justify-center shadow-[0_5px_15px_rgba(0,0,0,0.35)] pt-10 pb-10 sm:w-[90vw] md:w-[90vw] lg:w-[60vw] gap-6 mt-[20px]">
+          <div>
+              < CustomDatePicker date={date} setDate={setDate}/>
+          </div>
+          <div className="flex justify-center items-center p-0 m-0 relative w-full">
+              < CustomizedCurrencyDropdown selectedCurrency={fromCurrency} currencies={currencies} setSelectedCurrency={setFromCurrency} label={t('currency')}/>
+              <IoIosSwap className="cursor-pointer hover:text-blue-600/100" onClick={handleSwapCurrencies}/>
+              < CustomizedCurrencyDropdown selectedCurrency={toCurrency} currencies={currencies} setSelectedCurrency={setToCurrency} label={t('currency')}/>
+          </div >
+
+            <div className="flex  justify-center items-center p-0 m-0 relative w-full">
+                <Box
+                  component="form"
+                  noValidate
+                  autoComplete="off"
+                   sx={{
+                     width: '100%',
+                     display: 'flex',
+                     justifyContent: 'center',
+                     alignItems: 'center'
+                   }}
+                >
+                   <TextField sx={{ m: 1, width: '45%' }} size="small"
+                     required
+                     id="amountFrom"
+                     label={t('amount')}
+                     value={amountFrom}
+                     variant="filled"
+                     type="number"
+                     inputProps={{ step: "0.01", min: "0"}}
+                     onChange={(e) => {
+                            setAmountFrom(e.target.value)
+                            setLastChangedField("from")
+                         }}
+                   />
+                   <IoIosSwap className="text-white dark:text-black"/>
+                   <TextField sx={{ m: 1, width: '45%' }} size="small"
+                     required
+                     id="amountTo"
+                     label={t('amount')}
+                     value={amountTo}
+                     variant="filled"
+                     type="number"
+                     inputProps={{ step: "0.01", min: "0" }}
+                     onChange={(e) => {
+                                      setAmountTo(e.target.value)
+                                      setLastChangedField("to")
+                                   }}
+                   />
+                </Box>
+            </div>
+      </div>
+    </div>
+  ) : (
+           <div className="mt-20 text-2xl font-bold text-center"> {t('loading')} . . .</div>
+      );
+}
+
+export default CalculatorPage;
+
+

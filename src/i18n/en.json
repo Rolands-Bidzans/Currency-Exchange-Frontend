@@ -1,0 +1,12 @@
+{
+  "welcome": "Welcome",
+  "currency": "Currency",
+  "amount": "Amount",
+  "Language": "Language",
+  "selectDate": "select Date",
+  "currencyExchangeRateCalculator": "Currency exchange rate calculator",
+  "theme": "Theme",
+  "lightMode": "Light Mode",
+  "darkMode": "Dark Mode",
+  "loading": "Loading"
+}

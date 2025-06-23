@@ -1,0 +1,10 @@
+import * as React from 'react';
+import { IoCloudyNight } from "react-icons/io5";
+
+const ThemeSwitcher = () => {
+    return (
+          <IoCloudyNight className="text-5xl pointer-coarse:p-4"/>
+    )
+}
+
+export default ThemeSwitcher;

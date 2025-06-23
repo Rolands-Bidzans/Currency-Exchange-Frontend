@@ -1,0 +1,12 @@
+{
+  "welcome": "Laipni lūdzam",
+  "currency": "Valūta",
+  "amount": "Summa",
+  "Language": "Valoda",
+  "selectDate": "izvēlieties Datumu",
+  "currencyExchangeRateCalculator": "Valūtas kursu kalkulators",
+  "theme": "Tēma",
+  "lightMode": "Gaišais režīms",
+  "darkMode": "Tumšais režīms",
+  "loading": "Iegūst datus"
+}

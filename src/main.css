@@ -1,0 +1,14 @@
+/* add google fonts */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+/* importing countries flags */
+@import 'flag-icons/css/flag-icons.min.css';
+
+/* importing the base styles, component styles, and utility classes from Tailwind CSS into this project */
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+    --grape: 114, 35, 204;
+}
