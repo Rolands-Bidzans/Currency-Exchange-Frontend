@@ -14,6 +14,11 @@ cd currency-exchange-frontend
 npm install
 ```
 
+### Run Development Server
+```bash
+npm run dev
+```
+
 ### Configure API Endpoint
 The frontend expects the backend API URL in environment variables:
 
