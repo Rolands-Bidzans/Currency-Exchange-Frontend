@@ -4,8 +4,8 @@ This forntend uses data from Spring Boot API Backed project visit: https://githu
 
 ## Getting Started
 ### Prerequisites
-Node.js v18 or higher (tested with v22.14.0)
-npm package manage v9 or higher (tested with v10.5.2)
+- Node.js v18 or higher (tested with v22.14.0)
+- npm package manage v9 or higher (tested with v10.5.2)
 
 ### Installation
 ```bash
