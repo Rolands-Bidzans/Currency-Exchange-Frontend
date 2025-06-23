@@ -9,7 +9,7 @@ This forntend uses data from Spring Boot API Backed project visit: https://githu
 
 ### Installation
 ```bash
-git clone https://github.com/your-username/currency-exchange-frontend.git
+git clone https://github.com/Rolands-Bidzans/Currency-Exchange-Frontend.git
 cd currency-exchange-frontend
 npm install
 ```
@@ -24,5 +24,5 @@ The frontend expects the backend API URL in environment variables:
 
 Create a .env file in the project root:
 ```bash
-VITE_API_BASE_URL=http://localhost:8080/api
+VITE_API_URL=http://localhost:8085
 ```
